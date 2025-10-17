@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Semanas - Repositorio</title>
+    <link rel="stylesheet" href="css/semanas.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Botón hamburguesa -->
+    <img src="img/menu.jpg" alt="menu" class="hamburguer">
+
+    <!-- Menú lateral -->
+    <nav class="menu-navegacion">
+        <a href="index.html">Inicio</a>
+        <a href="semanas.html">Semanas</a>
+        <a href="#" id="loginLink">Login</a>
+    </nav>
+
+    <!-- Encabezado -->
+    <header class="header">
+        <div class="head">
+            <!-- Logo en la parte izquierda superior -->
+            <img src="img/logo.png" alt="Logo del Repositorio" class="logo" style="width: 60px; height: auto; margin-right: 15px; vertical-align: middle;">
+            <h1 class="titulo"><strong>Repositorio Personal</strong></h1>
+        </div>
+    </header>
+
+    <!-- Contenido principal (solo UN <main>) -->
+    <main class="contenedor">
+        <!-- Selector de curso -->
+        <section class="selector-curso">
+            <label for="cursoSelect"><strong>Seleccionar Curso:</strong></label>
+            <select id="cursoSelect">
+                <option value="arquitectura" selected>Arquitectura de Software</option>
+                <option value="sistemas">Sistemas Operativos</option>
+                <option value="redes">Redes</option>
+                <option value="base_datos">Base de Datos</option>
+            </select>
+        </section>
+
+        <!-- Información del curso -->
+        <section id="infoCurso" class="info-curso">
+            <h2>Contenido General</h2>
+            <p id="descripcionCurso">Este es el contenido de <strong>Arquitectura de Software</strong>.</p>
+        </section>
+
+        <!-- Semanas -->
+        <section class="semana-actual">
+            <h2 class="subtitulo"><strong>Semana Actual</strong></h2>
+            <div class="grid-semanas" id="gridSemanas">
+                <!-- Aquí se cargan dinámicamente las semanas -->
+            </div>
+        </section>
+    </main>
+
+    <<!-- ==== Modal Login ==== -->
+    <div class="modal-login" id="modalLogin" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); justify-content:center; align-items:center;">
+        <div class="modal-content" style="background:#222; padding:2rem; border-radius:8px; position:relative; max-width:400px; width:90%;">
+            <span class="close-btn" id="closeLogin" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:1.5rem;">&times;</span>
+            <form class="form-login" style="display:flex; flex-direction:column; gap:1rem;">
+                <h2>Iniciar Sesión</h2>
+                <input type="text" placeholder="Usuario" required>
+                <input type="password" placeholder="Contraseña" required>
+                <button type="submit">Ingresar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content contenedor">
+            <div class="contact-us">
+                <h2 class="brand">Repositorio</h2>
+                <p>Curso: <span id="cursoFooter">Arquitectura de Software</span></p>
+            </div>
+            <div class="social-media">
+                <a href="perfil.html" class="social-media-icon">
+                    <i class='bx bxl-facebook'></i>
+                </a>
+                <a href="perfil.html" class="social-media-icon">
+                    <i class='bx bxl-twitter'></i>
+                </a>
+                <a href="perfil.html" class="social-media-icon">
+                    <i class='bx bxl-instagram'></i>
+                </a>
+                <a href="perfil.html" class="social-media-icon">
+                    <i class='bx bxs-contact'></i>
+                </a>
+            </div>
+        </div>
+        <div class="line"></div>
+    </footer>
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menu = document.querySelector('.menu-navegacion');
+        const hamburguer = document.querySelector('.hamburguer');
+        const modalLogin = document.getElementById('modalLogin');
+        const closeLogin = document.getElementById('closeLogin');
+        const loginLink = document.getElementById('loginLink');
+        const cursoSelect = document.getElementById("cursoSelect");
+        const descripcionCurso = document.getElementById("descripcionCurso");
+        const cursoFooter = document.getElementById("cursoFooter");
+        const gridSemanas = document.getElementById("gridSemanas");
+
+        // Menú hamburguesa
+        hamburguer.addEventListener('click', () => {
+            menu.classList.toggle("spread");
+        });
+
+        // Modal de login (sin cambios)
+        loginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalLogin.style.display = "flex";
+            menu.classList.remove("spread");
+        });
+
+        closeLogin.addEventListener('click', () => {
+            modalLogin.style.display = "none";
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modalLogin) {
+                modalLogin.style.display = "none";
+            }
+        });
+
+        // Contenido de cursos (sin cambios, pero agregué más detalles a semanas si quieres)
+        const cursos = {
+            arquitectura: {
+                descripcion: "Contenido de <strong>Arquitectura de Software</strong>. Este curso cubre patrones, documentación y evaluación de sistemas.",
+                semanas: [
+                    "Mapas conceptuales sobre los fundamentos de la arquitectura",
+                    "Informe técnico con aplicación de estándares en un proyecto",
+                    "Documento de diseñoarquitectónico con diagramas UML o C4.",
+                ]
+            },
+            sistemas: {
+                descripcion: "Contenido de <strong>Sistemas Operativos</strong>. Enfocado en procesos, memoria y seguridad.",
+                semanas: [
+                    "Conceptos básicos",
+                    "Procesos e hilos",
+                    "Planificación de CPU",
+                    "Memoria principal",
+                    "Memoria virtual",
+                    "Sistemas de archivos",
+                    "Seguridad y protección",
+                    "Casos prácticos"
+                ]
+            },
+            redes: {
+                descripcion: "Contenido de <strong>Redes</strong>. Fundamentos de protocolos y seguridad en comunicaciones.",
+                semanas: [
+                    "Modelo OSI y TCP/IP",
+                    "Capa física",
+                    "Capa de enlace",
+                    "Capa de red",
+                    "Capa de transporte",
+                    "Servicios de red",
+                    "Seguridad en redes",
+                    "Laboratorios prácticos"
+                ]
+            },
+            base_datos: {
+                descripcion: "Contenido de <strong>Base de Datos</strong>. Diseño, SQL y administración de datos.",
+                semanas: [
+                    "Conceptos básicos",
+                    "Modelo relacional",
+                    "SQL básico",
+                    "Consultas avanzadas",
+                    "Normalización",
+                    "Transacciones",
+                    "Seguridad en BD",
+                    "Proyecto final"
+                ]
+            }
+        };
+
+        // Placeholder para archivos subidos (igual que en index.html)
+        const archivosSubidos = {
+            arquitectura: { 1: [
+                { nombre: "Semana 1.pdf", url: "https://lsgjlhpriezzjonrnwiq.supabase.co/storage/v1/object/public/archivos_curso/Semana%201%20(1).pdf" }
+            ], 2: [
+                { nombre: "Semana 2.pdf", url: "https://lsgjlhpriezzjonrnwiq.supabase.co/storage/v1/object/public/archivos_curso/Semana%202%20(1).pdf" }
+            ], 3: [], 4: [], 5: [], 6: [], 7: [], 8: [] },
+            sistemas: { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: [], 8: [] },
+            redes: { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: [], 8: [] },
+            base_datos: { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: [], 8: [] }
+        };
+
+        // Función para crear el modal de archivos (MODIFICADA: Colores para fondo negro y más ancho para previews)
+        function crearModalArchivos() {
+            if (document.getElementById('modalArchivos')) return;
+
+            const modal = document.createElement('div');
+            modal.id = 'modalArchivos';
+            modal.style = `
+                display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+                background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:1000;
+            `;
+
+            modal.innerHTML = `
+                <div style="background:#222; padding:2rem; border-radius:8px; max-width:700px; width:90%; position:relative; color: white;">
+                    <span id="cerrarModalArchivos" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:1.5rem; color: white;">&times;</span>
+                    <h2 style="color: white; margin-top: 0;">Archivos Subidos</h2>
+                    <div id="modalContenidoArchivos" style="max-height:400px; overflow-y:auto; color: white;"></div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+
+            document.getElementById('cerrarModalArchivos').addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            modal.addEventListener('click', e => {
+                if (e.target === modal) modal.style.display = 'none';
+            });
+        }
+
+        // Función para mostrar archivos en el modal (MODIFICADA: Con vista previa de Supabase)
+        function mostrarArchivos(curso, semana) {
+            crearModalArchivos();
+            const modal = document.getElementById('modalArchivos');
+            const modalContenido = document.getElementById('modalContenidoArchivos');
+
+            const archivos = archivosSubidos[curso]?.[semana] || [];
+
+            modalContenido.innerHTML = "";
+
+            if (archivos.length === 0) {
+                modalContenido.innerHTML = "<p style='color: white;'>No hay archivos disponibles para esta semana.</p>";
+            } else {
+                archivos.forEach(archivo => {
+                    const contenedorArchivo = document.createElement('div');
+                    contenedorArchivo.style = "border: 1px solid #444; margin-bottom: 1rem; padding: 1rem; border-radius: 5px; background: #333;";
+
+                    const nombreArchivo = document.createElement('h4');
+                    nombreArchivo.textContent = archivo.nombre;
+                    nombreArchivo.style.margin = "0 0 0.5rem 0";
+                    nombreArchivo.style.color = "white";
+
+                    const extension = archivo.nombre.split('.').pop().toLowerCase();  // Detecta extensión (pdf, jpg, etc.)
+                    const url = archivo.url || '#';
+
+                    let previewElement = null;
+
+                    // VISTA PREVIA SEGÚN TIPO DE ARCHIVO
+                    if (extension === 'jpg' || extension === 'jpeg' || extension === 'png' || extension === 'gif') {
+                        // Preview para imágenes de Supabase
+                        previewElement = document.createElement('img');
+                        previewElement.src = url;
+                        previewElement.style.maxWidth = "100%";
+                        previewElement.style.maxHeight = "200px";
+                        previewElement.style.borderRadius = "5px";
+                        previewElement.onerror = () => { 
+                            previewElement.style.display = 'none'; 
+                        };
+
+                    } else if (extension === 'pdf') {
+                        // Preview para PDFs de Supabase (PDF.js o iframe fallback)
+                        previewElement = document.createElement('div');
+                        previewElement.id = `pdf-preview-${Date.now()}`;
+                        previewElement.style.height = "200px";
+                        previewElement.style.overflow = "auto";
+                        previewElement.style.border = "1px solid #ccc";
+                        previewElement.style.borderRadius = "5px";
+                        previewElement.style.background = "white";
+
+                        if (typeof pdfjsLib !== 'undefined') {
+                            // Usar PDF.js si está cargado
+                            pdfjsLib.getDocument(url).promise.then(pdf => {
+                                pdf.getPage(1).then(page => {
+                                    const scale = 1.5;
+                                    const viewport = page.getViewport({ scale });
+                                    const canvas = document.createElement('canvas');
+                                    const context = canvas.getContext('2d');
+                                    canvas.height = viewport.height;
+                                    canvas.width = viewport.width;
+                                    previewElement.appendChild(canvas);
+
+                                    const renderContext = {
+                                        canvasContext: context,
+                                        viewport: viewport
+                                    };
+                                    page.render(renderContext);
+                                });
+                            }).catch(error => {
+                                // Fallback a iframe
+                                previewElement.innerHTML = '<iframe src="' + url + '" width="100%" height="200px" style="border:none;"></iframe>';
+                            });
+                        } else {
+                            // Fallback sin PDF.js: Iframe directo
+                            previewElement.innerHTML = '<iframe src="' + url + '" width="100%" height="200px" style="border:none;"></iframe>';
+                        }
+
+                    } else if (extension === 'mp4' || extension === 'webm' || extension === 'ogg') {
+                        // Preview para videos de Supabase
+                        previewElement = document.createElement('video');
+                        previewElement.src = url;
+                        previewElement.controls = true;
+                        previewElement.style.maxWidth = "100%";
+                        previewElement.style.maxHeight = "200px";
+
+                    } else {
+                        // Fallback para otros archivos
+                        previewElement = document.createElement('p');
+                        previewElement.textContent = "Vista previa no disponible para este tipo de archivo.";
+                        previewElement.style.color = "#ccc";
+                    }
+
+                    // Enlace de descarga (siempre disponible)
+                    const enlaceDescarga = document.createElement('a');
+                    enlaceDescarga.href = url;
+                    enlaceDescarga.textContent = "Descargar archivo";
+                    enlaceDescarga.target = "_blank";
+                    enlaceDescarga.style.color = "#007bff";
+                    enlaceDescarga.style.display = "block";
+                    enlaceDescarga.style.marginTop = "0.5rem";
+                    enlaceDescarga.style.textDecoration = "underline";
+
+                    // Armar el contenedor
+                    contenedorArchivo.appendChild(nombreArchivo);
+                    if (previewElement) contenedorArchivo.appendChild(previewElement);
+                    contenedorArchivo.appendChild(enlaceDescarga);
+
+                    modalContenido.appendChild(contenedorArchivo);
+                });
+            }
+
+            modal.style.display = 'flex';
+        }
+
+        // Función para renderizar semanas (MODIFICADA: Clic en card abre modal)
+        function renderSemanas(curso) {
+            gridSemanas.innerHTML = "";
+            cursos[curso].semanas.forEach((tema, index) => {
+                const div = document.createElement("div");
+                div.className = "card-semana";
+                div.style = `
+                    background: #222; 
+                    padding: 1rem; 
+                    border-radius: 8px; 
+                    color: white; 
+                    margin: 0.5rem; 
+                    cursor: pointer;  /* Indica que es clickable */
+                    transition: background-color 0.3s ease;  /* Efecto hover sutil */
+                `;
+                // NUEVO: onclick para abrir modal al clic en la card
+                div.onclick = () => mostrarArchivos(curso, index + 1);  // Semana = index + 1
+                
+                // Opcional: Hover para resaltar
+                div.onmouseover = () => { div.style.background = '#333'; };
+                div.onmouseout = () => { div.style.background = '#222'; };
+
+                div.innerHTML = `
+                    <h3>Semana ${index + 1}</h3>
+                    <p>${tema}</p>
+                `;
+                gridSemanas.appendChild(div);
+            });
+        }
+
+        // Inicializar con curso por defecto
+        const cursoInicial = "arquitectura";
+        descripcionCurso.innerHTML = cursos[cursoInicial].descripcion;
+        cursoFooter.textContent = "Arquitectura de Software";
+        renderSemanas(cursoInicial);
+
+        // Cambiar dinámicamente al seleccionar curso
+        cursoSelect.addEventListener("change", (e) => {
+            const curso = e.target.value;
+            const nombreCurso = e.target.options[e.target.selectedIndex].text;
+            descripcionCurso.innerHTML = cursos[curso].descripcion;
+            cursoFooter.textContent = nombreCurso;
+            renderSemanas(curso);
+        });
+    });
+</script>
+</body>
+</html>

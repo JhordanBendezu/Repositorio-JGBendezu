@@ -1,0 +1,699 @@
+/* Reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  /* Gradiente animado oscuro con matices azules */
+  background: linear-gradient(-45deg,
+    #000000 0%,     /* negro absoluto */
+    #0b0f19 25%,    /* negro azulado */
+    #0a1628 50%,    /* tono intermedio azul oscuro */
+    #0b0f19 75%,    /* negro azulado */
+    #000000 100%    /* negro puro */
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 18s ease infinite;
+  color: #e2e8f0;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Neblina azul muy tenue para dar vida al negro */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.06) 0%, transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(147, 197, 253, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+  animation: nebulaFloat 25s ease-in-out infinite alternate;
+}
+
+@keyframes nebulaFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(10px, -10px) scale(1.05);
+    opacity: 0.7;
+  }
+}
+
+
+/* Contenedor general */
+.contenedor{
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 60px 0;
+}
+
+/* Header principal */
+.header{
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.head{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+
+.titulo{
+    font-size: 40px;
+    margin-bottom: 15px;
+    color: #38bdf8; /* celeste */
+}
+
+.copy{
+    font-weight: 200;
+    font-size: 22px;
+    color: #e2e8f0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #111;
+    color: white;
+    width: 100%;
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.logo-nav {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #007bff;
+}
+/* Subtítulos */
+.subtitulo{
+    color: #38bdf8; /* celeste */
+    font-size: 36px;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+/* Lista de semanas */
+.lista-semanas{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    margin-top: 30px;
+}
+
+.lista-semanas li{
+    flex: 1 1 220px;
+    max-width: 260px;
+}
+
+.card-semana {
+  flex: 1 1 calc(25% - 20px); /* 4 por fila con espacio */
+  max-width: calc(25% - 20px);
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid #334155;
+}
+.card-semana h3{
+    font-size: 22px;
+    color: #38bdf8; /* celeste */
+    margin-bottom: 10px;
+}
+
+.card-semana p{
+    font-size: 15px;
+    color: #cbd5e1;
+    margin-bottom: 15px;
+}
+
+.card-semana a{
+    display: inline-block;
+    padding: 10px 15px;
+    background: #38bdf8;
+    color: #0f172a;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.card-semana a:hover{
+    background: #0ea5e9;
+    transform: scale(1.05);
+}
+
+.card-semana:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+/* ==== MODAL LOGIN ==== */
+.modal-login{
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content{
+    background: #1e293b; /* fondo oscuro */
+    padding: 35px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    animation: fadeIn 0.3s ease;
+    color: #fff;
+}
+
+.close-btn{
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    color: #38bdf8;
+    cursor: pointer;
+}
+
+.form-login{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-login h2{
+    text-align: center;
+    margin-bottom: 15px;
+    color: #38bdf8;
+}
+
+.form-login input{
+    padding: 12px;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    font-size: 16px;
+    background: #0f172a;
+    color: #fff;
+}
+
+.form-login button{
+    background: #38bdf8;
+    color: #0f172a;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.form-login button:hover{
+    background: #0ea5e9;
+}
+
+/* ==== INFORMACIÓN DEL CURSO ==== */
+.info-curso {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 25px 30px;
+    margin: 30px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    line-height: 1.6;
+    color: #e2e8f0;
+}
+
+.info-curso h2 {
+    font-size: 1.8rem;
+    color: #38bdf8;
+    margin-bottom: 15px;
+    text-align: center;
+    border-bottom: 2px solid #38bdf8;
+    padding-bottom: 8px;
+}
+
+.info-curso h3 {
+    font-size: 1.3rem;
+    color: #0ea5e9;
+    margin-top: 20px;
+}
+
+.info-curso p {
+    font-size: 1rem;
+    text-align: justify;
+    margin-bottom: 15px;
+}
+
+.info-curso li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: #cbd5e1;
+}
+.info-curso {
+  /* ... tus estilos ... */
+  opacity: 0; /* Inicia oculto */
+  transform: translateY(20px); /* Baja inicial */
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.info-curso.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.info-curso li {
+  /* ... tus estilos ... */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.info-curso.animate-in li:nth-child(1) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+.info-curso.animate-in li:nth-child(2) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+.info-curso.animate-in li:nth-child(3) { transition-delay: 0.6s; opacity: 1; transform: translateY(0); }
+.info-curso.animate-in li:nth-child(4) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+.info-curso.animate-in li:nth-child(5) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+.info-curso.animate-in li:nth-child(6) { transition-delay: 0.6s; opacity: 1; transform: translateY(0); }
+.info-curso h2, .info-curso h3 {
+  opacity: 0; transform: translateX(-30px); transition: all 0.8s ease;
+}
+.info-curso.reveal h2, .info-curso.reveal h3 {
+  opacity: 1; transform: translateX(0);
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); /* Glow dark */
+}
+/* Añade más para listas largas */
+/* ==== SEMANA ACTUAL ==== */
+.semana-actual {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.semana-actual .card-semana {
+    display: inline-block;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 20px 25px;
+    width: 280px;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.semana-actual .card-semana:hover {
+    transform: scale(1.05);
+}
+
+.semana-actual .card-semana h3 {
+    color: #38bdf8;
+    margin-bottom: 10px;
+}
+
+.semana-actual .card-semana p {
+    margin-bottom: 15px;
+    color: #e2e8f0;
+}
+
+.btn-semana {
+    display: inline-block;
+    background: #38bdf8;
+    color: #0f172a;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: background 0.3s;
+    font-weight: bold;
+}
+
+.btn-semana:hover {
+    background: #7fc3eb;
+}
+
+/* ==== FOOTER ==== */
+footer{
+    background: linear-gradient(to top, #0f172a 0%, #1e293b 100%);
+    padding-bottom: 10px;
+    color: #fff;
+}
+
+.footer-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 40px 0;
+}
+
+.contact-us{
+    width: 40%;
+}
+
+.brand{
+    font-weight: 600;
+    font-size: 30px;
+    color: #38bdf8;
+}
+
+.social-media{
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.social-media-icon{
+    display: inline-block;
+    margin-left: 20px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #38bdf8;
+    border-radius: 50%;
+    text-align: center;
+    color: #38bdf8;
+    transition: all 0.3s;
+}
+
+.social-media-icon i{
+    font-size: 25px;
+    line-height: 50px;
+}
+
+.social-media-icon:hover{
+    background: #38bdf8;
+    color: #0f172a;
+}
+
+.line{
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    height: 2px;
+    background: #38bdf8;
+    margin-top: 30px;
+}
+/* ==== Selector de Curso (modificado: ahora con slider animado estilo WWF) ==== */
+.selector-curso {
+  margin: 40px auto;
+  padding: 20px 25px;
+  background: #161140;              /* azul oscuro, igual que el fondo */
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  text-align: center;
+  max-width: 800px;                 /* Más ancho para slider horizontal */
+  position: relative;               /* Para posicionar controles absolutos */
+}
+
+.selector-curso label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffdf8e;                   /* dorado suave como acento */
+  margin-bottom: 15px;              /* Espacio debajo del label */
+  display: block;                   /* Full-width para centrado */
+}
+
+/* Contenedor del slider */
+.slider-cursos {
+  position: relative;
+  width: 100%;
+  height: 200px;                    /* Alto fijo para slides; ajusta si necesitas más */
+  overflow: hidden;                 /* Oculta slides no activos */
+  border-radius: 8px;
+  background: rgba(30, 41, 59, 0.5); /* Fondo semi-transparente para contraste */
+  margin: 0 auto;
+}
+
+/* Cada slide individual */
+.slide-curso {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateX(100%);      /* Inicia fuera de vista (derecha) */
+  transition: opacity 0.6s ease, transform 0.6s ease; /* Transición suave WWF */
+  padding: 20px;
+  cursor: pointer;                  /* Clicable para seleccionar */
+}
+
+.slide-curso.active {
+  opacity: 1;
+  transform: translateX(0);         /* Slide-in desde derecha */
+  z-index: 2;                       /* Encima de otros slides */
+}
+
+/* Slide anterior (para efecto de navegación) */
+.slide-curso.prev {
+  transform: translateX(-100%);     /* Sale a la izquierda */
+  opacity: 0;
+}
+
+/* Imagen/Ícono en el slide (animación WWF: bounce/impacto al activarse) */
+.slide-imagen {
+  flex: 0 0 120px;                  /* Ancho fijo para ícono/imagen */
+  height: 120px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9); /* Gradiente celeste */
+  transition: transform 0.4s ease;
+}
+
+.slide-curso.active .slide-imagen {
+  animation: impactoWWF 0.5s ease;  /* Efecto "golpe" al activarse */
+  transform: scale(1.1);            /* Zoom leve persistente */
+}
+
+.slide-imagen i {                   /* Para íconos Font Awesome */
+  font-size: 3rem;
+  color: #0f172a;                   /* Fondo oscuro para contraste */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Si usas <img> en lugar de íconos, añade esto */
+.slide-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Texto del slide (fade-in suave) */
+.slide-texto {
+  flex: 1;
+  text-align: left;
+  color: #e2e8f0;
+}
+
+.slide-texto h3 {
+  font-size: 1.5rem;
+  color: #38bdf8;                   /* Celeste para título */
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.slide-texto p {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  line-height: 1.4;
+}
+
+/* Controles: Flechas prev/next (estilo WWF: grandes y con hover) */
+.slider-prev,
+.slider-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(56, 189, 248, 0.8); /* Celesti semi-transparente */
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: #0f172a;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 3;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.slider-prev {
+  left: 10px;
+}
+
+.slider-next {
+  right: 10px;
+}
+
+.slider-prev:hover,
+.slider-next:hover {
+  background: #38bdf8;
+  transform: translateY(-50%) scale(1.1); /* Escala al hover */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
+
+.slider-prev i,
+.slider-next i {
+  display: block;
+  line-height: 50px;
+}
+
+/* Indicadores (puntos debajo del slider, animados) */
+.slider-indicadores {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.indicador-slide {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.3); /* Celesti tenue */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicador-slide.active,
+.indicador-slide:hover {
+  background: #38bdf8;              /* Celesti full al active/hover */
+  transform: scale(1.3);            /* Escala WWF para énfasis */
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5); /* Glow */
+}
+
+/* Animaciones WWF (@keyframes) */
+@keyframes impactoWWF {
+  0% {
+    transform: scale(0.8) rotate(-5deg); /* Empieza pequeño y torcido (como un "ataque") */
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(2deg);  /* Rebote/impacto */
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.1) rotate(0deg);  /* Final estable con zoom */
+    opacity: 1;
+  }
+}
+
+/* Responsivo: Mobile-first adjustments */
+@media (max-width: 768px) {
+  .selector-curso {
+    max-width: 100%;
+    padding: 15px;
+    margin: 20px auto;
+  }
+  
+  .slider-cursos {
+    height: 180px; /* Menos alto en mobile */
+  }
+  
+  .slide-curso {
+    flex-direction: column; /* Stack vertical: imagen arriba, texto abajo */
+    text-align: center;
+    padding: 15px;
+  }
+  
+  .slide-imagen {
+    margin-right: 0;
+    margin-bottom: 15px;
+    flex: none;
+  }
+  
+  .slide-texto h3 {
+    font-size: 1.3rem;
+  }
+  
+  .slider-prev,
+  .slider-next {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  /* Ocultar flechas en very small screens; usa swipe o taps en slides */
+  @media (max-width: 480px) {
+    .slider-prev,
+    .slider-next {
+      display: none; /* Solo indicadores en mobile pequeño */
+    }
+  }
+}

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Repositorio - Cursos</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="slider.css">
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Barra de navegación superior -->
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+            <img src="img/logo.png" alt="Logo" class="logo-nav">
+            <span>Repositorio</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="index.html">Semanas</a></li>
+            <li><a href="#" id="loginLink">Login</a></li>
+        </ul>
+    </div>
+</nav>
+    <!-- Encabezado -->
+    <header class="header">
+        <div class="spline-bg">
+        <iframe 
+            src="https://my.spline.design/claritystream-cmHkzEVrJpKK3bHCGxo2wOIP/"
+            frameborder="0"
+        width="100%"
+        height="100%"
+        style="position:absolute; top:0; left:0; width:100%; height:100%; border:none; z-index:1;">
+    </iframe>
+    </div>
+        <div class="head">
+            <h1 class="titulo" id="cursoTitulo">Repositorio Personal</h1>
+            <p class="copy" id="cursoDescripcion">Proyectos, Entregables y Más</p>
+        </div>
+    </header>
+
+    <!-- Selector de curso (reemplazado por slider animado estilo WWF con cursos) -->
+    <section class="selector-curso contenedor">
+        <label for="sliderCursos"><strong>Seleccionar Curso:</strong></label>
+        <div id="sliderCursos" class="slider-cursos">
+            <!-- Slides para cada curso: cada uno con imagen de fondo/ícono, texto y data-value para JS -->
+            <div class="slide-curso active" data-curso="arquitectura">
+                <div class="slide-imagen">
+                    <!-- Aquí va imagen o ícono animado; e.g., <img src="img/arquitectura.jpg" alt="Arquitectura"> o ícono FA -->
+                    <i class="fas fa-building"></i>
+                </div>
+                <div class="slide-texto">
+                    <h3>Arquitectura de Software</h3>
+                    <p>Fundamentos y diseño de sistemas.</p>
+                </div>
+            </div>
+            <div class="slide-curso" data-curso="sistemas">
+                <div class="slide-imagen">
+                    <!-- Imagen o ícono para Sistemas Operativos -->
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <div class="slide-texto">
+                    <h3>Sistemas Operativos</h3>
+                    <p>Gestión de procesos y recursos.</p>
+                </div>
+            </div>
+            <div class="slide-curso" data-curso="redes">
+                <div class="slide-imagen">
+                    <!-- Imagen o ícono para Redes -->
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <div class="slide-texto">
+                    <h3>Redes</h3>
+                    <p>Conexiones y protocolos de red.</p>
+                </div>
+            </div>
+            <div class="slide-curso" data-curso="base_datos">
+                <div class="slide-imagen">
+                    <!-- Imagen o ícono para Base de Datos -->
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="slide-texto">
+                    <h3>Base de Datos</h3>
+                    <p>Modelado y gestión de datos.</p>
+                </div>
+            </div>
+            <!-- Controles del slider (flechas o indicadores para navegación animada) -->
+            <button class="slider-prev" id="sliderPrev"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-next" id="sliderNext"><i class="fas fa-chevron-right"></i></button>
+            <div class="slider-indicadores" id="sliderIndicadores"></div>
+        </div>
+        <!-- Input hidden para mantener compatibilidad con JS existente si es necesario -->
+        <input type="hidden" id="cursoSelect" value="arquitectura">
+    </section>
+
+    <!-- Contenido principal -->
+    <!-- 🔹 CONTENIDO PRINCIPAL -->
+  <main class="contenedor">
+    <section class="info-curso">
+      <h2 class="subtitulo"><strong>Información del Curso</strong></h2>
+      <p id="cursoInfo">Aquí aparecerá la información del curso seleccionado.</p>
+      <h3>Contenido General</h3>
+      <ol id="cursoContenido"></ol>
+    </section>
+
+    <section class="semana-actual" id="semanas">
+      <h2 class="subtitulo"><strong>Semanas Realizadas</strong></h2>
+      <div id="cardsSemanaContainer" class="cards-semana-container" style="display:flex; gap:1rem; flex-wrap:wrap;">
+        <!-- Las cards se generan dinámicamente con JS -->
+      </div>
+    </section>  
+  </main>
+
+    <div class="modal-login" id="modalLogin" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:1001;">
+        <div class="modal-content" style="background:#222; padding:2rem; border-radius:8px; position:relative; max-width:400px; width:90%; color: white;">
+            <span class="close-btn" id="closeLogin" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:1.5rem; color:white;">&times;</span>
+            <form id="formLogin" class="form-login" style="display:flex; flex-direction:column; gap:1rem;">
+                <h2>Iniciar Sesión</h2>
+                <input type="email" id="emailLogin" placeholder="Email" required style="padding:0.8rem; border-radius:5px; border:1px solid #ccc; background:#333; color:white;">
+                <input type="password" id="passwordLogin" placeholder="Contraseña" required style="padding:0.8rem; border-radius:5px; border:1px solid #ccc; background:#333; color:white;">
+                <button type="submit" style="background:#007bff; color:white; padding:0.8rem; border:none; border-radius:5px; cursor:pointer;">Ingresar</button>
+            </form>
+            
+            <!-- Nuevo: Separador y botón de Google -->
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <p style="margin: 0 0 1rem 0; color: #888;">O continúa con</p>
+                <button type="button" id="btnGoogleLogin" style="background: #fff; color: #4285f4; padding: 0.8rem 1.5rem; border: 2px solid #4285f4; border-radius: 5px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; font-weight: bold;">
+                    <i class="fab fa-google" style="font-size: 1.2rem;"></i>
+                    Continuar con Google
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal "Login Requerido" para subir archivos -->
+    <div class="modal-login-requerido" id="modalLoginRequerido" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:1001;">
+        <div class="modal-content" style="background:#222; padding:2rem; border-radius:8px; position:relative; max-width:400px; width:90%; text-align:center; color: white;">
+            <span class="close-btn" id="closeLoginRequerido" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:1.5rem; color:white;">&times;</span>
+            <h2>¡Acceso Restringido!</h2>
+            <p>Solo se puede subir archivos cuando estés logueado. <strong>Inicia sesión primero</strong> para continuar.</p>
+            <button id="btnIrALogin" class="btn-login" style="background:#007bff; color:white; padding:0.8rem 1.5rem; border:none; border-radius:5px; cursor:pointer; margin-top:1rem;">Iniciar Sesión</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content contenedor">
+            <div class="contact-us">
+                <h2 class="brand">Repositorio</h2>
+                <p id="cursoFooter">Curso seleccionado aparecerá aquí</p>
+            </div>
+            <div class="social-media">
+                <a href="perfil.html" class="social-media-icon">
+                    <i class='bx bxl-facebook'></i>
+                </a>
+                <a href="perfil.html" class="social-media-icon">
+                    <i class='bx bxl-twitter'></i>
+                </a>
+                <a href="perfil.html" class="social-media-icon">
+                    <i class='bx bxl-instagram'></i>
+                </a>
+                <a href="perfil.html" class="social-media-icon">
+                    <i class='bx bxs-contact'></i>
+                </a>
+            </div>
+        </div>
+        <div class="line"></div>
+    </footer>
+
+    <!-- Script menú hamburguesa + login (básico; el submit se maneja en cursos.js) -->
+    <script>
+        const menu = document.querySelector('.menu-navegacion');
+        const hamburguer = document.querySelector('.hamburguer');
+        const modalLogin = document.getElementById('modalLogin');
+        const closeLogin = document.getElementById('closeLogin');
+        const loginLink = document.getElementById('loginLink');
+
+        // Menú hamburguesa
+        hamburguer.addEventListener('click', () => {
+            menu.classList.toggle("spread");
+        });
+
+        // Abrir modal desde el enlace "Login"
+        loginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalLogin.style.display = "flex";
+            menu.classList.remove("spread");
+        });
+
+        // Cerrar modal
+        closeLogin.addEventListener('click', () => {
+            modalLogin.style.display = "none";
+        });
+
+        // Cerrar clic fuera
+        window.addEventListener('click', (e) => {
+            if (e.target === modalLogin) {
+                modalLogin.style.display = "none";
+            }
+        });
+
+        // Cerrar con Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalLogin.style.display === 'flex') {
+                modalLogin.style.display = "none";
+            }
+        });
+    </script>
+
+    <!-- Importar Supabase y script de cursos -->
+     <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/cursos.js"></script>
+</body>
+</html>

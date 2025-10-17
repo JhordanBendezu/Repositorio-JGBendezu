@@ -1,0 +1,301 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: linear-gradient(to bottom, #0f172a, #1e293b); /* azul oscuro elegante */
+  color: #f8fafc;
+  line-height: 1.6;
+}
+
+/* Contenedor */
+.contenedor {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 0;
+}
+
+/* Títulos */
+.titulo {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 700;
+  color: #38bdf8; /* azul celeste */
+}
+
+/* Selector de curso */
+.selector-curso {
+  margin: 20px auto 40px auto;
+  padding: 12px 20px;
+  background: #1e293b;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  max-width: 400px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.selector-curso label {
+  color: #f1f5f9;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.selector-curso select {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: #f8fafc;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.selector-curso select:hover {
+  background: #e2e8f0;
+}
+
+/* Información del curso */
+.info-curso {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.info-curso h2 {
+  font-size: 22px;
+  color: #38bdf8;
+  margin-bottom: 10px;
+}
+
+.info-curso p {
+  color: #e2e8f0;
+}
+
+/* Grid de semanas */
+.grid-semanas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+/* Tarjetas de semanas */
+.card-semana {
+  background: linear-gradient(135deg, #1e40af, #1e293b);
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  padding: 25px 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+}
+
+.card-semana h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #38bdf8;
+}
+
+.card-semana:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+}
+
+/* Menú lateral */
+.hamburguer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #fff;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.4);
+}
+
+.menu-navegacion {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 280px;
+  height: 100%;
+  background: #0f172a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(110%);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: -2px 0 6px rgba(0,0,0,.5);
+  z-index: 100;
+}
+
+.menu-navegacion a {
+  color: #f1f5f9;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 12px 0;
+  transition: color 0.3s ease;
+}
+
+.menu-navegacion a:hover {
+  color: #38bdf8;
+}
+
+.spread {
+  transform: translateX(0);
+}
+
+/* Footer */
+footer {
+  background: #0f172a;
+  padding: 25px 0;
+  margin-top: 50px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 40px;
+}
+
+.contact-us {
+  width: 40%;
+  color: #f1f5f9;
+}
+
+.brand {
+  font-weight: 600;
+  font-size: 26px;
+  color: #38bdf8;
+}
+
+.social-media {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.social-media-icon {
+  display: inline-block;
+  margin-left: 15px;
+  width: 45px;
+  height: 45px;
+  border: 1px solid #38bdf8;
+  border-radius: 50%;
+  text-align: center;
+  color: #38bdf8;
+  transition: all 0.3s;
+}
+
+.social-media-icon i {
+  font-size: 22px;
+  line-height: 45px;
+}
+
+.social-media-icon:hover {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+.line {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto 0 auto;
+  height: 2px;
+  background: #334155;
+}
+.card-semana:hover {
+    background-color: #333 !important;  /* Fuerza el hover si no se ve */
+}
+#modalArchivos .modal-content {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);  /* Sombra al modal */
+}
+/* ==== MODAL LOGIN ==== */
+.modal-login{
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content{
+    background: #1e293b; /* fondo oscuro */
+    padding: 35px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    animation: fadeIn 0.3s ease;
+    color: #fff;
+}
+
+.close-btn{
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    color: #38bdf8;
+    cursor: pointer;
+}
+
+.form-login{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-login h2{
+    text-align: center;
+    margin-bottom: 15px;
+    color: #38bdf8;
+}
+
+.form-login input{
+    padding: 12px;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    font-size: 16px;
+    background: #0f172a;
+    color: #fff;
+}
+
+.form-login button{
+    background: #38bdf8;
+    color: #0f172a;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.form-login button:hover{
+    background: #0ea5e9;
+}

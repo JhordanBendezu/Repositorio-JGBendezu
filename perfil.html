@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Información Personal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.263.1/font/lucide.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            background-color: #fafafa;
+            color: #171717;
+            line-height: 1.6;
+            padding: 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 600px;
+            margin: 2rem auto;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            margin-bottom: 1rem;
+        }
+        
+        .card-header h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .card-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .card-body {
+            padding: 2rem;
+        }
+        
+        .info-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-section h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+        
+        .info-item i {
+            margin-right: 0.75rem;
+            color: #1e3a8a;
+            min-width: 24px;
+            text-align: center;
+        }
+        
+        .info-item span {
+            flex: 1;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f1f5f9;
+            color: #1e3a8a;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .social-link:hover {
+            background-color: #1e3a8a;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn {
+            background-color: #f1f5f9;
+            border: none;
+            color: #1e3a8a;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            margin-left: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        
+        .copy-btn:hover {
+            background-color: #1e3a8a;
+            color: white;
+        }
+        
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+        
+        .toggle-theme {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background-color: #f1f5f9;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #1e3a8a;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #1e3a8a;
+            color: #f8fafc;
+        }
+        
+        .dark-mode .card {
+            background-color: #2b4b7a;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark-mode .social-link {
+            background-color: #334155;
+            color: #93c5fd;
+        }
+        
+        .dark-mode .copy-btn {
+            background-color: #334155;
+            color: #93c5fd;
+        }
+        
+        .dark-mode .social-link:hover,
+        .dark-mode .copy-btn:hover {
+            background-color: #93c5fd;
+            color: #1e3a8a;
+        }
+        
+        .dark-mode .info-section h2,
+        .dark-mode .info-item i {
+            color: #93c5fd;
+        }
+        
+        .dark-mode footer {
+            color: #cbd5e1;
+        }
+        
+        .dark-mode .toggle-theme {
+            background-color: #334155;
+            color: #93c5fd;
+        }
+        
+        @media (max-width: 640px) {
+            .card {
+                margin: 1rem;
+            }
+            
+            .card-body {
+                padding: 1.5rem;
+            }
+            
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-theme" id="themeToggle">
+        <i class="lu lu-moon"></i>
+    </button>
+    
+    <div class="card">
+        <div class="card-header">
+            <img src="img/logo1.jpg" alt="Foto de perfil profesional" class="profile-img">
+            <h1>Jhordan Gabriel Bendezu Pomachahua</h1>
+            <p>Ingeniero de Sistemas y Computacion</p>
+        </div>
+        
+        <div class="card-body">
+            <div class="info-section">
+                <h2><i class="lu lu-user"></i> Información Personal</h2>
+                <div class="info-item">
+                    <i class="lu lu-mail"></i>
+                    <span>ybendezu19@gmail.com</span>
+                    <button class="copy-btn" data-copy="ybendezu19@gmail.com">
+                        <i class="lu lu-copy"></i>
+                    </button>
+                </div>
+                <div class="info-item">
+                    <i class="lu lu-phone"></i>
+                    <span>957111671</span>
+                    <button class="copy-btn" data-copy="+11234567890">
+                        <i class="lu lu-copy"></i>
+                    </button>
+                </div>
+                <div class="info-item">
+                    <i class="lu lu-map-pin"></i>
+                    <span>Huancayo, Peru</span>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h2><i class="lu lu-briefcase"></i> Experiencia</h2>
+                <div class="info-item">
+                    <i class="lu lu-building"></i>
+                    <span>Practica Pre Profesionales</span>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h2><i class="lu lu-graduation-cap"></i> Educación</h2>
+                <div class="info-item">
+                    <i class="lu lu-school"></i>
+                    <span>Universidad Peruana de los Andes - Bachiller (2026)</span>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h2><i class="lu lu-star"></i> Habilidades</h2>
+                <div class="info-item">
+                    <i class="lu lu-check"></i>
+                    <span>Liderazgo</span>
+                </div>
+                <div class="info-item">
+                    <i class="lu lu-check"></i>
+                    <span>Autoconocimiento</span>
+                </div>
+                <div class="info-item">
+                    <i class="lu lu-check"></i>
+                    <span>Comunicación asertiva</span>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="index.html" class="social-link" aria-label="LinkedIn">
+                    <i class="lu lu-linkedin"></i>
+                </a>
+                <a href="index.html" class="social-link" aria-label="GitHub">
+                    <i class="lu lu-github"></i>
+                </a>
+                <a href="index.html" class="social-link" aria-label="Twitter">
+                    <i class="lu lu-twitter"></i>
+                </a>
+                <a href="index.html" class="social-link" aria-label="Email">
+                    <i class="lu lu-mail"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2024 Jhordan. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Funcionalidad para cambiar entre modo claro/oscuro
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Verificar preferencia del usuario
+        if (localStorage.getItem('theme') === 'dark' || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme'))) {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('lu-moon');
+            themeIcon.classList.add('lu-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.remove('lu-moon');
+                themeIcon.classList.add('lu-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.remove('lu-sun');
+                themeIcon.classList.add('lu-moon');
+            }
+        });
+        
+        // Funcionalidad para copiar información
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const textToCopy = this.getAttribute('data-copy');
+                
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    const originalHTML = this.innerHTML;
+                    this.innerHTML = '<i class="lu lu-check"></i>';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalHTML;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Error al copiar texto: ', err);
+                });
+            });
+        });
+        
+        // Animación para la tarjeta al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.card').style.opacity = '0';
+            document.querySelector('.card').style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                document.querySelector('.card').style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                document.querySelector('.card').style.opacity = '1';
+                document.querySelector('.card').style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
