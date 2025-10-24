@@ -548,7 +548,7 @@ async function actualizarCurso(curso) {
     card.style = "flex:1 1 30%; background:#222; padding:1rem; border-radius:8px; color:white;";
     card.innerHTML = `
       <h3>Semana ${i}</h3>
-      <p>Tema: ${temas[i - 1] || "Tema no definido"}</p>
+      <p>Tema: ${temas[i - 1] || "Diagramas UML y Implementacion web"}</p>
       <input type="file" id="fileSemana${i}" style="display:none;">
       ${
         logueado
@@ -737,4 +737,5 @@ if (btnGoogleLogin) {
 } else {
   console.warn('DEBUG: Botón #btnGoogleLogin no encontrado. Verifica HTML.');
 }
+
 
