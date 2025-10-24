@@ -542,7 +542,7 @@ async function actualizarCurso(curso) {
 
   // Renderizar tarjetas semanales
   cardsSemanaContainer.innerHTML = "";
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 6; i++) {
     const card = document.createElement('div');
     card.className = 'card-semana';
     card.style = "flex:1 1 30%; background:#222; padding:1rem; border-radius:8px; color:white;";
@@ -737,3 +737,4 @@ if (btnGoogleLogin) {
 } else {
   console.warn('DEBUG: Botón #btnGoogleLogin no encontrado. Verifica HTML.');
 }
+
